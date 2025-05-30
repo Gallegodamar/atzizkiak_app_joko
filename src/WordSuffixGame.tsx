@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { WordPair, SuffixedWord } from './types';
 import { euskaraWords } from './data';
 import { euskaraVerbs } from './verbData';
@@ -29,7 +29,7 @@ const extractSuffixedForms = (base: string, wordList: WordPair[]): SuffixedWord[
         if (!seenForms.has(fullBasqueForm.toLowerCase())) {
           forms.push({
             id: item.id.toString(),
-            base: base,
+            base,
             suffix: potentialSuffix,
             fullBasque: fullBasqueForm,
             spanish: item.spanish,
@@ -109,14 +109,14 @@ const WordSuffixGame: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row gap-3 items-center p-4 bg-hitzkale-card-bg shadow-md rounded-lg">
+    <div className="flex flex-col min-h-[calc(100vh-100px)] space-y-4">
+      <form onSubmit={handleSearchSubmit} className="p-4 bg-hitzkale-card-bg shadow-md rounded-lg flex flex-col sm:flex-row gap-3 items-center">
         <input
           type="text"
           value={inputValue}
           onChange={handleInputChange}
           placeholder="Sartu euskal hitz bat (adib. 'egon', 'ekarri')"
-          className="flex-grow p-3 border border-hitzkale-border rounded-md focus:ring-2 focus:ring-hitzkale-primary focus:border-transparent outline-none text-lg w-full sm:w-auto"
+          className="flex-grow p-3 border border-hitzkale-border rounded-md text-lg w-full sm:w-auto"
         />
         <button
           type="submit"
@@ -130,23 +130,23 @@ const WordSuffixGame: React.FC = () => {
       {error && <p className="text-red-500 text-center">{error}</p>}
 
       {baseWord && !isLoading && (
-        <div className="flex flex-col md:flex-row gap-8 p-4 bg-hitzkale-card-bg shadow-xl rounded-lg">
-          <div className="md:w-1/3 p-6">
-            <h2 className="text-6xl font-bold text-hitzkale-primary mb-4 break-all">{baseWord}</h2>
+        <div className="flex flex-col md:flex-row gap-4 flex-grow overflow-hidden bg-hitzkale-card-bg shadow-xl rounded-lg p-4">
+          <div className="md:w-1/3 p-2">
+            <h2 className="text-4xl font-bold text-hitzkale-primary break-words text-center md:text-left">{baseWord}</h2>
           </div>
 
-          <div className="md:w-1/3 p-2 max-h-[400px] overflow-y-auto">
-            <h3 className="text-2xl font-semibold text-hitzkale-secondary mb-3">Atzizkiak:</h3>
+          <div className="md:w-1/3 p-2 overflow-y-auto max-h-64 md:max-h-none border-y md:border-y-0 md:border-x border-hitzkale-border">
+            <h3 className="text-2xl font-semibold text-hitzkale-secondary mb-2">Atzizkiak:</h3>
             {suffixedForms.length > 0 ? (
               <div className="space-y-2">
                 {suffixedForms.map((form) => (
                   <button
                     key={form.id}
                     onClick={() => handleSuffixClick(form)}
-                    className={`w-full text-left p-3 rounded-md ${
+                    className={`w-full text-left p-2 rounded-md ${
                       selectedForm?.id === form.id
-                        ? 'bg-hitzkale-primary text-white shadow-md'
-                        : 'bg-hitzkale-light-bg hover:bg-hitzkale-accent hover:text-white text-hitzkale-dark-text'
+                        ? 'bg-hitzkale-primary text-white'
+                        : 'bg-hitzkale-light-bg hover:bg-hitzkale-accent hover:text-white'
                     }`}
                   >
                     -{form.suffix} ({form.fullBasque})
@@ -158,19 +158,17 @@ const WordSuffixGame: React.FC = () => {
             )}
           </div>
 
-          <div className="md:w-1/3 p-6">
-            <h3 className="text-2xl font-semibold text-hitzkale-secondary mb-3">Esanahia:</h3>
+          <div className="md:w-1/3 p-2">
+            <h3 className="text-2xl font-semibold text-hitzkale-secondary mb-2">Esanahia:</h3>
             {selectedForm ? (
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <p className="text-2xl font-bold text-hitzkale-primary">{selectedForm.fullBasque}</p>
-                <div className="text-lg text-hitzkale-dark-text space-y-1">
-                  {formatSpanishMeaning(selectedForm.spanish)}
-                </div>
+                <div className="text-lg text-hitzkale-dark-text">{formatSpanishMeaning(selectedForm.spanish)}</div>
               </div>
             ) : suffixedForms.length > 0 ? (
-              <p className="text-hitzkale-medium-text italic">Aukeratu atzizki bat bere esanahia ikusteko.</p>
+              <p className="italic text-hitzkale-medium-text">Aukeratu atzizki bat bere esanahia ikusteko.</p>
             ) : (
-              <p className="text-hitzkale-medium-text italic">Ez dago esanahirik erakusteko.</p>
+              <p className="italic text-hitzkale-medium-text">Ez dago esanahirik erakusteko.</p>
             )}
           </div>
         </div>
