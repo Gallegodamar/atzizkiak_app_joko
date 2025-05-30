@@ -12,20 +12,36 @@ const App: React.FC = () => {
         <nav className="flex flex-wrap justify-center gap-3 sm:gap-6 py-4 px-2">
           <button
             onClick={() => setActiveView('hiztegia')}
-            className={\`text-lg font-medium px-3 py-2 rounded-md transition \${activeView === 'hiztegia' ? 'bg-hitzkale-primary text-white' : 'hover:bg-hitzkale-light-bg'}\`}
-          >🔍 Hiztegia</button>
+            className={`text-lg font-medium px-3 py-2 rounded-md transition ${
+              activeView === 'hiztegia' ? 'bg-hitzkale-primary text-white' : 'hover:bg-hitzkale-light-bg'
+            }`}
+          >
+            🔍 Hiztegia
+          </button>
           <button
             onClick={() => setActiveView('favorites')}
-            className={\`text-lg font-medium px-3 py-2 rounded-md transition \${activeView === 'favorites' ? 'bg-hitzkale-primary text-white' : 'hover:bg-hitzkale-light-bg'}\`}
-          >⭐ Gogokoak</button>
+            className={`text-lg font-medium px-3 py-2 rounded-md transition ${
+              activeView === 'favorites' ? 'bg-hitzkale-primary text-white' : 'hover:bg-hitzkale-light-bg'
+            }`}
+          >
+            ⭐ Gogokoak
+          </button>
           <button
             onClick={() => setActiveView('stats')}
-            className={\`text-lg font-medium px-3 py-2 rounded-md transition \${activeView === 'stats' ? 'bg-hitzkale-primary text-white' : 'hover:bg-hitzkale-light-bg'}\`}
-          >📊 Estatistikak</button>
+            className={`text-lg font-medium px-3 py-2 rounded-md transition ${
+              activeView === 'stats' ? 'bg-hitzkale-primary text-white' : 'hover:bg-hitzkale-light-bg'
+            }`}
+          >
+            📊 Estatistikak
+          </button>
           <button
             onClick={() => setActiveView('quiz')}
-            className={\`text-lg font-medium px-3 py-2 rounded-md transition \${activeView === 'quiz' ? 'bg-hitzkale-primary text-white' : 'hover:bg-hitzkale-light-bg'}\`}
-          >🧠 Quiz</button>
+            className={`text-lg font-medium px-3 py-2 rounded-md transition ${
+              activeView === 'quiz' ? 'bg-hitzkale-primary text-white' : 'hover:bg-hitzkale-light-bg'
+            }`}
+          >
+            🧠 Quiz
+          </button>
         </nav>
       </header>
 
