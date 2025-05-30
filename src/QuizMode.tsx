@@ -58,7 +58,7 @@ const QuizMode: React.FC = () => {
               <button
                 key={i}
                 onClick={() => handleSelect(opt)}
-                className={\`w-full p-3 rounded-md border ${
+                className={`w-full p-3 rounded-md border ${
                   selected === opt
                     ? correct == null
                       ? 'bg-hitzkale-light-bg'
@@ -66,7 +66,7 @@ const QuizMode: React.FC = () => {
                       ? 'bg-green-500 text-white'
                       : 'bg-red-500 text-white'
                     : 'hover:bg-hitzkale-accent hover:text-white'
-                }\`}
+                }`}
               >
                 {opt}
               </button>
