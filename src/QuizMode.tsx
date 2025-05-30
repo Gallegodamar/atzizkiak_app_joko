@@ -1,0 +1,1 @@
+[QuizMode.tsx: código completo insertado previamente]
